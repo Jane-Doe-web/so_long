@@ -16,21 +16,12 @@
 # define COLLECTIBLE "./textures/kebab.xpm"
 # define EXIT "./textures/train.xpm"
 
-# define TILE_SIZE 60
-/*
-typedef struct map_check
+# define TILE_SIZE 64
+
+typedef struct vars
 {
-
-}   t_map;
-
-typedef struct program
-{
-
-}   t_program;
-
-typedef struct player
-{
-
-} t_player;*/
+	void	*mlx;
+	char	**map;
+}  	t_vars;
 
 #endif
