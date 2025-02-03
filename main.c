@@ -1,67 +1,41 @@
 #include "so_long.h"
 
-/*initialize_game(t_vars vars, char *path)
+void	error_handler(char *str)
 {
-
-}*/
-
-char **read_map(char *map_path)
-{
-	int	fd;
-	char	**map;
-	int 	i;
-	char	*line;
-	int	line_count;
-
-	line_count = 0;
-	i = 0;
-	fd = open(map_path, O_RDONLY);
-	if (fd < 0)
-		return(NULL);
-	while ((line = get_next_line(fd)) != NULL)
-	{
-		line_count++;
-		free(line);
-	}
-	close(fd);
-	map = malloc(sizeof(char *) * line_count + 1);
-	if (!map)
-		return(NULL);
-	fd = open(map_path, O_RDONLY);
-	if (fd < 0)
-		return(NULL);
-	while ((line = get_next_line(fd)) != NULL)
-	{
-		map[i] = line;
-		i++;
-	}
-	map[i] = NULL;
-	close(fd);
-	return(map);
+	ft_putstr_fd(str, 2);
+	exit (1);
 }
-
-int main(int argc, char *argv[])
+void	initialize_game(t_vars *vars, char *argv)
 {
-    t_vars	vars;
-    if (argc != 2)
-    {
-        ft_putstr_fd("The number of arguments is invalid", 2);
-        exit (1);
-    }
-    if (ft_strlen(argv[1]) < 4 
-            || ft_strncmp(argv[1] + ft_strlen(argv[1]) - 4, ".ber", 4) != 0)
-    {
-        ft_putstr_fd("The extension is invalid", 2);
-        exit (1);
-    }
-    //initialize_game(&vars, argv[1]);
-    vars.map = read_map(argv[1]);
+	vars->map_height = 0;
+	vars->map_width = 0;
+	vars->x = 0;
+	vars->y = 0;
+	vars->count_collect = 0;
+	vars->count_player = 0;
+	vars->count_exit = 0;
+}
+int	main(int argc, char *argv[])
+{
+	t_vars vars;
+	
+	if (argc != 2)
+		error_handler("The number of arguments is invalid");
+	if (ft_strlen(argv[1]) < 4 || ft_strncmp(argv[1] + ft_strlen(argv[1]) - 4, ".ber", 4) != 0)
+		error_handler("The extension is invalid");
+	initialize_game(&vars, argv[1]);
+	vars.map = read_map(argv[1], &vars);
+	if (!vars.map)
+		error_handler("Cannot load the map");
+	vars.count_collect = validate_map(&vars);
 
-    /*
-    
-    parse_map(&program, argv[1]);
-    start_game(&program);
-    clean(&program);
-    }*/
-
+    // Debug: Print map to check if it loads correctly
+    int i = 0;
+    while (vars.map[i])
+    {
+        printf("%s\n", vars.map[i]);
+        free(vars.map[i]);  
+        i++;
+    }
+    free(vars.map);  
 }
