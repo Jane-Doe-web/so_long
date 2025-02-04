@@ -3,16 +3,20 @@
 int	open_map_file(char *map_path)
 {
 	int	fd;
+	char	buffer[1];
 	
 	fd = open(map_path, O_RDONLY);
 	if (fd < 0)
+		error_handler("Failed to open map file");
+	if (read(fd, buffer, 1) == 0)
 	{
-		ft_putstr_fd("Failed to open the map file\n", 2);
-		return (-1);
+		close(fd);
+		error_handler("Map file is empty");
 	}
-	return (fd);
+	// Reset file descriptor to the beginning
+	close(fd);
+	return (open(map_path, O_RDONLY));
 }
-
 char    *trim_line(char *line)
 {
 	int len = ft_strlen(line);

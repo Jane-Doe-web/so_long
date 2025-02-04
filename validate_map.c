@@ -4,14 +4,10 @@ void	process_count_CPE(t_vars *vars)
 {
 	if (vars->count_collect < 1)
 		error_handler("Nothing to collect");
-	if (vars->count_player > 1)
-		error_handler("More than 1 player");
-	if (vars->count_exit < 1)
-		error_handler("No exit");
-	printf("%d\n", vars->count_collect);
-	printf("%d\n", vars->count_player);
-	printf("%d\n", vars->count_exit);
-
+	if (vars->count_player != 1)
+		error_handler("No player or more than 1 player");
+	if (vars->count_exit != 1)
+		error_handler("No exit or more than 1 exit");
 }
 int	if_characters_collectibles_player_exit (t_vars *vars)
 {
@@ -25,7 +21,7 @@ int	if_characters_collectibles_player_exit (t_vars *vars)
 		{
 			c = vars->map[vars->y][vars->x];
 			if (c != 'C' && c != 'P' && c != 'E' && c != '0' && c != '1')
-				error_handler("Set of characters is invalid");
+				error_handler("There is an unknown character");
 			if (c == 'C') 
 				vars->count_collect++;
 			if (c == 'P')
@@ -72,6 +68,6 @@ int	validate_map (t_vars *vars)
 {
 	vars->map_width = if_walls_rectangular(vars);
 	vars->count_collect = if_characters_collectibles_player_exit(vars);
-//	if_possible_to_win(vars);
+	if_possible_to_win(vars);
 	return(vars->count_collect);
 }

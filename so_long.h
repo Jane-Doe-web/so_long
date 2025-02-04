@@ -24,11 +24,14 @@ typedef struct vars
 	char	**map;
 	int	map_height;
 	int	map_width;
-	int	x; //position on the map
-	int	y; //position on the map
+	int	x; //map coordinates
+	int	y; //map coordinates
 	int	count_collect;
 	int	count_player;
 	int	count_exit;
+	int	player_y;
+	int	player_x;
+	
 }  	t_vars;
 
 void	error_handler(char *str);
@@ -40,5 +43,6 @@ void	process_count_CPE(t_vars *vars);
 int	if_characters_collectibles_player_exit (t_vars *vars);
 int	if_walls_rectangular (t_vars *vars);
 int	validate_map (t_vars *vars);
+void	if_possible_to_win(t_vars *vars);
 
 #endif

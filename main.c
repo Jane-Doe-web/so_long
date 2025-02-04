@@ -29,13 +29,15 @@ int	main(int argc, char *argv[])
 		error_handler("Cannot load the map");
 	vars.count_collect = validate_map(&vars);
 
-    // Debug: Print map to check if it loads correctly
-    int i = 0;
-    while (vars.map[i])
-    {
-        printf("%s\n", vars.map[i]);
-        free(vars.map[i]);  
-        i++;
-    }
-    free(vars.map);  
+
+
+    	// Debug: Print map to check if it loads correctly
+	int i = 0;
+	while (vars.map[i])
+	{
+		printf("%s\n", vars.map[i]);
+		free(vars.map[i]);  
+		i++;
+	}
+	free(vars.map);  
 }
