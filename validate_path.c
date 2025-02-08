@@ -18,7 +18,7 @@ char	**duplicate_map(t_vars *vars)
 	int	i;
 
 	i = 0;
-	copy_map = malloc(sizeof(char *) * vars->map_height + 1);
+	copy_map = malloc(sizeof(char *) * (vars->map_height + 1));
 	if (!copy_map)
 		return(NULL);
 	while (i < vars->map_height)
@@ -27,12 +27,35 @@ char	**duplicate_map(t_vars *vars)
 		if (!copy_map[i])
 		{
 			free_map(copy_map, i);
+			copy_map = NULL;
 			return(NULL);
 		}
 		i++;
 	}
 	copy_map[i] = NULL;
 	return(copy_map);
+}
+void	fill(char **map, t_vars *vars, char target, int row, int col)
+{
+	if (row < 0 || col < 0 || row >= vars->map_height || col >= vars->map_width)
+		return;
+	if (map[row][col] == 'F' || map[row][col] == '1')
+		return;
+	if (map[row][col] == 'C')
+	{
+		vars->reachable_collect++;
+		map[row][col] = '0';
+	}
+	if (map[row][col] == 'E')
+	{
+		vars->exit_flag = 1;
+		map[row][col] = '0';
+	}		
+	map[row][col] = 'F';
+	fill(map, vars, target, row - 1, col);
+	fill(map, vars, target, row + 1, col);
+	fill(map, vars, target, row, col - 1);
+	fill(map, vars, target, row, col + 1);
 }
 void	flood_fill(char **map, t_vars *vars) 
 {
@@ -44,18 +67,23 @@ void	flood_fill(char **map, t_vars *vars)
 	while (map[i])
 	{
 		j = 0;
-		while (map[i][j])
-		{
-			if (map[i][j] == 'P')
-			{
-				vars->player_y = i;
-				vars->player_x = j;
-				map[i][j] == '0';
-			}	
-		}
+		while (map[i][j] && map[i][j] != 'P')
+			j++;
+		if (map[i][j] == 'P')
+			break;	
+		i++;
 	}
-target = map[i][j];
-
+	vars->player_y = i;
+	vars->player_x = j;
+	vars->init_player_y = i;
+	vars->init_player_x = j;
+	map[i][j] = '0';
+	target = map[i][j];
+	fill(map, vars, target, i, j);
+	if (vars->reachable_collect != vars->count_collect)
+		error_handler("Collectibles are not reachable");
+	if (!vars->exit_flag)
+		error_handler("Exit is not reachable");
 }
 
 void	if_possible_to_win(t_vars *vars)
@@ -63,5 +91,9 @@ void	if_possible_to_win(t_vars *vars)
 	char **copy_map;
 
 	copy_map = duplicate_map(vars);
-	flood_fill(copy_map, vars);
+	if (copy_map)
+	{
+		flood_fill(copy_map, vars);
+		free_map (copy_map, vars->map_height);
+	}
 }

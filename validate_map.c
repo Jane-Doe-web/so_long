@@ -9,7 +9,7 @@ void	process_count_CPE(t_vars *vars)
 	if (vars->count_exit != 1)
 		error_handler("No exit or more than 1 exit");
 }
-int	if_characters_collectibles_player_exit (t_vars *vars)
+void	if_characters_collectibles_player_exit (t_vars *vars)
 {
 	char	c;
 
@@ -32,8 +32,7 @@ int	if_characters_collectibles_player_exit (t_vars *vars)
 		}
 		vars->y++;
 	}
-	process_count_CPE(vars); 
-	return (vars->count_collect);
+	process_count_CPE(vars);
 }
 
 int	if_walls_rectangular (t_vars *vars)
@@ -64,10 +63,9 @@ int	if_walls_rectangular (t_vars *vars)
 	return(vars->x);
 }
 
-int	validate_map (t_vars *vars)
+void	validate_map (t_vars *vars)
 {
 	vars->map_width = if_walls_rectangular(vars);
-	vars->count_collect = if_characters_collectibles_player_exit(vars);
+	if_characters_collectibles_player_exit(vars);
 	if_possible_to_win(vars);
-	return(vars->count_collect);
 }

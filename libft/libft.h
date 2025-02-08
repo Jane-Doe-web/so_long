@@ -14,6 +14,8 @@
 
 # include <stdio.h>
 # include <ctype.h>
+# include <stdarg.h>
+# include <unistd.h>
 
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
@@ -25,6 +27,15 @@ int		ft_toupper(int c);
 int		ft_tolower(int c);
 int		ft_atoi(const char *nptr);
 int		ft_memcmp(const void *s1, const void *s2, size_t n);
+int		case_conditions(const char *str, va_list ap);
+int		ft_printf(const char *str, ...);
+int		ft_putchar(char c);
+int		ft_putstr(char *s);
+int		ft_printnum(int n);
+int		ft_print_unsigned_int(unsigned int n);
+int		ft_print_lower_hexa(unsigned long n);
+int		ft_print_upper_hexa(unsigned int n);
+int		ft_print_ptr(void *ptr);
 size_t	ft_strlen(const char *s);
 size_t	ft_strlcpy(char *dest, const char *src, size_t size);
 size_t	ft_strlcat(char *dst, const char *src, size_t size);
