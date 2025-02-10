@@ -2,12 +2,18 @@
 
 void	free_images(t_vars *vars)
 {
-    if (vars->wall) mlx_destroy_image(vars->mlx, vars->wall);
-    if (vars->floor) mlx_destroy_image(vars->mlx, vars->floor);
-    if (vars->exit) mlx_destroy_image(vars->mlx, vars->exit);
-    if (vars->collect) mlx_destroy_image(vars->mlx, vars->collect);
-    if (vars->player) mlx_destroy_image(vars->mlx, vars->player);
-    if (vars->start) mlx_destroy_image(vars->mlx, vars->start);
+    if (vars->wall) 
+		mlx_destroy_image(vars->mlx, vars->wall);
+    if (vars->floor) 
+		mlx_destroy_image(vars->mlx, vars->floor);
+    if (vars->exit) 
+		mlx_destroy_image(vars->mlx, vars->exit);
+    if (vars->collect) 
+		mlx_destroy_image(vars->mlx, vars->collect);
+    if (vars->player)
+		mlx_destroy_image(vars->mlx, vars->player);
+    if (vars->start) 
+		mlx_destroy_image(vars->mlx, vars->start);
 }
 void	exit_function(t_vars *vars)
 {
@@ -17,7 +23,7 @@ void	exit_function(t_vars *vars)
 	vars->window = NULL;
 	if (vars->mlx)
 	{
-        	mlx_destroy_display(vars->mlx);
+        mlx_destroy_display(vars->mlx);
 		free(vars->mlx);
 		vars->mlx = NULL;
 	}
