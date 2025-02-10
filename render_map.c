@@ -17,6 +17,12 @@ void	set_img(t_vars *vars)
 	vars->collect = mlx_xpm_file_to_image(vars->mlx, COLLECT, &tile_size, &tile_size);
 	vars->player = mlx_xpm_file_to_image(vars->mlx, PLAYER_IDLE, &tile_size, &tile_size);
 	vars->start = mlx_xpm_file_to_image(vars->mlx, START, &tile_size, &tile_size);
+	if (!vars->wall || !vars->floor || !vars->exit 
+		|| !vars->collect || !vars->player || !vars->start)
+		{
+			free_images(vars);
+			error_handler("Failed to load images");
+		}
 }
 
 void	draw_img(t_vars *vars, void *img, int x, int y)
@@ -69,7 +75,6 @@ void	render_the_rest(t_vars *vars)
 }
 void	render_map(t_vars *vars)
 {
-	set_img(vars);
 	render_background_and_walls(vars);
 	render_the_rest(vars);
 }

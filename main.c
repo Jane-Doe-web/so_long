@@ -18,6 +18,20 @@ void	initialize_game(t_vars *vars)
 	vars->exit_flag = 0;
 	vars->reachable_collect = 0;
 	vars->steps = 0;
+	vars->mlx = NULL;
+	vars->window = NULL;
+	vars->wall = NULL;
+	vars->floor = NULL;
+	vars->player = NULL;
+	vars->exit = NULL;
+	vars->start = NULL;
+	vars->collect = NULL;
+	vars->img = NULL;
+	vars->map = NULL;
+	vars->player_y = 0;
+	vars->player_x = 0;
+	vars->init_player_y = 0;
+	vars->init_player_x = 0;	
 }
 void	start_game_window(t_vars *vars)
 {
@@ -47,6 +61,7 @@ int	main(int argc, char *argv[])
 		error_handler("Cannot load the map");
 	validate_map(&vars);
 	start_game_window(&vars);
+	set_img(&vars);
 	render_map (&vars);
 	mlx_hook(vars.window, 2, 1L << 0, &handle_key, &vars);
 	mlx_hook(vars.window, 17, 0, &handle_exit, &vars);

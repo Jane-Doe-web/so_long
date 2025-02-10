@@ -1,6 +1,6 @@
 NAME = so_long
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -fPIC
+CFLAGS = -Wall -Wextra -Werror
 LIBFT_DIR = libft
 GET_NEXT_LINE_DIR = get_next_line
 MLX_DIR = mlx_linux

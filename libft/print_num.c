@@ -20,7 +20,6 @@ int	ft_printnum(int n)
 
 	nbr = n;
 	counter = 0;
-	printf("");
 	if (nbr < 0)
 	{
 		write(1, "-", 1);
