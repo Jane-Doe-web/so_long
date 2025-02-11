@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   handle_moves.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: esteudle <esteudle@student.42berlin.d      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/11 15:29:32 by esteudle          #+#    #+#             */
+/*   Updated: 2025/02/11 18:34:10 by esteudle         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 #include "so_long.h"
 
 void	you_win(t_vars *vars)
@@ -15,12 +26,11 @@ void	move_player(t_vars *vars, int i, int j)
 
 	upd_y = vars->player_y + i;
 	upd_x = vars->player_x + j;
-
 	if (vars->map[upd_y][upd_x] == 'C')
 		vars->count_collect--;
 	if (vars->map[upd_y][upd_x] == 'E'
 		&& vars->count_collect == 0)
-			you_win(vars);
+		you_win(vars);
 	if (vars->map[upd_y][upd_x] != '1'
 		&& vars->map[upd_y][upd_x] != 'E')
 	{
@@ -47,10 +57,11 @@ int	handle_key(int keysym, t_vars *vars)
 		move_player(vars, 0, 1);
 	if (keysym == XK_Escape)
 		exit_function(vars);
-	return(0);
+	return (0);
 }
+
 int	handle_exit(t_vars *vars)
 {
 	exit_function(vars);
-	return(0);
+	return (0);
 }

@@ -1,4 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   validate_path.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: esteudle <esteudle@student.42berlin.d      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/11 15:32:25 by esteudle          #+#    #+#             */
+/*   Updated: 2025/02/11 19:45:29 by esteudle         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 #include "so_long.h"
+
 void	free_map(char **map, int height)
 {
 	int	i;
@@ -15,12 +27,12 @@ void	free_map(char **map, int height)
 char	**duplicate_map(t_vars *vars)
 {
 	char	**copy_map;
-	int	i;
+	int		i;
 
 	i = 0;
 	copy_map = malloc(sizeof(char *) * (vars->map_height + 1));
 	if (!copy_map)
-		return(NULL);
+		return (NULL);
 	while (i < vars->map_height)
 	{
 		copy_map[i] = ft_strdup(vars->map[i]);
@@ -28,19 +40,20 @@ char	**duplicate_map(t_vars *vars)
 		{
 			free_map(copy_map, i);
 			copy_map = NULL;
-			return(NULL);
+			return (NULL);
 		}
 		i++;
 	}
 	copy_map[i] = NULL;
-	return(copy_map);
+	return (copy_map);
 }
+
 void	fill(char **map, t_vars *vars, char target, int row, int col)
 {
 	if (row < 0 || col < 0 || row >= vars->map_height || col >= vars->map_width)
-		return;
+		return ;
 	if (map[row][col] == 'F' || map[row][col] == '1')
-		return;
+		return ;
 	if (map[row][col] == 'C')
 	{
 		vars->reachable_collect++;
@@ -50,17 +63,18 @@ void	fill(char **map, t_vars *vars, char target, int row, int col)
 	{
 		vars->exit_flag = 1;
 		map[row][col] = '0';
-	}		
+	}
 	map[row][col] = 'F';
 	fill(map, vars, target, row - 1, col);
 	fill(map, vars, target, row + 1, col);
 	fill(map, vars, target, row, col - 1);
 	fill(map, vars, target, row, col + 1);
 }
-void	flood_fill(char **map, t_vars *vars) 
+
+void	flood_fill(char **map, t_vars *vars)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
 	char	target;
 
 	i = 0;
@@ -70,7 +84,7 @@ void	flood_fill(char **map, t_vars *vars)
 		while (map[i][j] && map[i][j] != 'P')
 			j++;
 		if (map[i][j] == 'P')
-			break;	
+			break ;
 		i++;
 	}
 	vars->player_y = i;
@@ -88,7 +102,7 @@ void	flood_fill(char **map, t_vars *vars)
 
 void	if_possible_to_win(t_vars *vars)
 {
-	char **copy_map;
+	char	**copy_map;
 
 	copy_map = duplicate_map(vars);
 	if (copy_map)

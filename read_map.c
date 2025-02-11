@@ -1,10 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   read_map.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: esteudle <esteudle@student.42berlin.d      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/11 15:30:35 by esteudle          #+#    #+#             */
+/*   Updated: 2025/02/11 18:45:46 by esteudle         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 #include "so_long.h"
 
 int	open_map_file(char *map_path)
 {
-	int	fd;
+	int		fd;
 	char	buffer[1];
-	
+
 	fd = open(map_path, O_RDONLY);
 	if (fd < 0)
 		error_handler("Failed to open map file");
@@ -13,23 +24,26 @@ int	open_map_file(char *map_path)
 		close(fd);
 		error_handler("Map file is empty");
 	}
-	// Reset file descriptor to the beginning
 	close(fd);
 	return (open(map_path, O_RDONLY));
 }
-char    *trim_line(char *line)
+
+char	*trim_line(char *line)
 {
-	int len = ft_strlen(line);
-	if (line[len - 1] == '\n')  // Check if the last character is a newline
-		line[len - 1] = '\0';  
+	int	len;
+
+	len = ft_strlen(line);
+	if (line[len - 1] == '\n')
+		line[len - 1] = '\0';
 	return (line);
 }
+
 char	**read_map(char *map_path, t_vars *vars)
 {
-	int     fd;
-	char    **map;
-	char    *line;
-	
+	int		fd;
+	char	**map;
+	char	*line;
+
 	fd = open_map_file (map_path);
 	while ((line = get_next_line(fd)) != NULL)
 	{

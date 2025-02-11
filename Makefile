@@ -21,7 +21,7 @@ $(GET_NEXT_LINE_DIR)/%.o: $(GET_NEXT_LINE_DIR)/%.c
 
 # Rule to build the executable
 $(NAME): $(OBJS) $(GET_NEXT_LINE_OBJS) $(LIBFT_DIR)/libft.a
-	$(CC) $(CFLAGS) $(OBJS) $(GET_NEXT_LINE_OBJS) -L$(LIBFT_DIR) -L$(MLX_DIR) -lft -lmlx -lX11 -lXext -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) $(GET_NEXT_LINE_OBJS) -L$(MLX_DIR) -lmlx -L$(LIBFT_DIR) -lft -lX11 -lXext -o $(NAME)
 
 # Rule to compile the main sources
 %.o: %.c

@@ -1,6 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   validate_map.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: esteudle <esteudle@student.42berlin.d      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/11 15:31:46 by esteudle          #+#    #+#             */
+/*   Updated: 2025/02/11 19:39:50 by esteudle         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 #include "so_long.h"
 
-void	process_count_CPE(t_vars *vars)
+void	process_count_cpe(t_vars *vars)
 {
 	if (vars->count_collect < 1)
 		error_handler("Nothing to collect");
@@ -9,7 +20,8 @@ void	process_count_CPE(t_vars *vars)
 	if (vars->count_exit != 1)
 		error_handler("No exit or more than 1 exit");
 }
-void	if_characters_collectibles_player_exit (t_vars *vars)
+
+void	if_characters_collectibles_player_exit(t_vars *vars)
 {
 	char	c;
 
@@ -32,23 +44,25 @@ void	if_characters_collectibles_player_exit (t_vars *vars)
 		}
 		vars->y++;
 	}
-	process_count_CPE(vars);
+	process_count_cpe(vars);
 }
 
-int	if_walls_rectangular (t_vars *vars)
+int	if_walls_rectangular(t_vars *vars)
 {
 	int	bottom_max;
 	int	r_max;
+
 	bottom_max = vars->map_height - 1;
 	while (vars->y < vars->map_height - 1)
-	{	
+	{
 		if (ft_strlen(vars->map[vars->y]) != ft_strlen(vars->map[vars->y + 1]))
 			error_handler("Not rectangular");
 		vars->y++;
 	}
 	while (vars->map[0][vars->x] && vars->map[bottom_max][vars->x])
-	{	
-		if (vars->map[0][vars->x] != '1' || vars->map[bottom_max][vars->x] != '1')
+	{
+		if (vars->map[0][vars->x] != '1' 
+			|| vars->map[bottom_max][vars->x] != '1')
 			error_handler("Upper or bottom wall has a hole");
 		vars->x++;
 	}
@@ -60,10 +74,10 @@ int	if_walls_rectangular (t_vars *vars)
 			error_handler("Right or left wall has a hole");
 		vars->y++;
 	}
-	return(vars->x);
+	return (vars->x);
 }
 
-void	validate_map (t_vars *vars)
+void	validate_map(t_vars *vars)
 {
 	vars->map_width = if_walls_rectangular(vars);
 	if_characters_collectibles_player_exit(vars);

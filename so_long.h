@@ -53,7 +53,7 @@ char    *trim_line(char *line);
 char	**duplicate_map(t_vars *vars);
 char	**read_map(char *map_path, t_vars *vars);
 void	initialize_game(t_vars *vars);
-void	process_count_CPE(t_vars *vars);
+void	process_count_cpe(t_vars *vars);
 void	if_characters_collectibles_player_exit (t_vars *vars);
 void	error_handler(char *str);
 void	validate_map (t_vars *vars);

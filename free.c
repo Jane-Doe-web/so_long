@@ -1,20 +1,32 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   free.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: esteudle <esteudle@student.42berlin.d      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/11 15:28:20 by esteudle          #+#    #+#             */
+/*   Updated: 2025/02/11 18:31:55 by esteudle         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 #include "so_long.h"
 
 void	free_images(t_vars *vars)
 {
-    if (vars->wall) 
+	if (vars->wall)
 		mlx_destroy_image(vars->mlx, vars->wall);
-    if (vars->floor) 
+	if (vars->floor)
 		mlx_destroy_image(vars->mlx, vars->floor);
-    if (vars->exit) 
+	if (vars->exit)
 		mlx_destroy_image(vars->mlx, vars->exit);
-    if (vars->collect) 
+	if (vars->collect)
 		mlx_destroy_image(vars->mlx, vars->collect);
-    if (vars->player)
+	if (vars->player)
 		mlx_destroy_image(vars->mlx, vars->player);
-    if (vars->start) 
+	if (vars->start)
 		mlx_destroy_image(vars->mlx, vars->start);
 }
+
 void	exit_function(t_vars *vars)
 {
 	free_images(vars);
@@ -23,7 +35,7 @@ void	exit_function(t_vars *vars)
 	vars->window = NULL;
 	if (vars->mlx)
 	{
-        mlx_destroy_display(vars->mlx);
+		mlx_destroy_display(vars->mlx);
 		free(vars->mlx);
 		vars->mlx = NULL;
 	}
