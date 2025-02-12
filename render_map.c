@@ -16,19 +16,19 @@ void	set_img(t_vars *vars)
 	int	tile_size;
 
 	tile_size = TILE_SIZE;
-	vars->wall = mlx_xpm_file_to_image(vars->mlx, WALL, 
+	vars->wall = mlx_xpm_file_to_image(vars->mlx, WALL,
 			&tile_size, &tile_size);
-	vars->floor = mlx_xpm_file_to_image(vars->mlx, FLOOR, 
+	vars->floor = mlx_xpm_file_to_image(vars->mlx, FLOOR,
 			&tile_size, &tile_size);
-	vars->exit = mlx_xpm_file_to_image(vars->mlx, EXIT, 
+	vars->exit = mlx_xpm_file_to_image(vars->mlx, EXIT,
 			&tile_size, &tile_size);
-	vars->collect = mlx_xpm_file_to_image(vars->mlx, COLLECT, 
+	vars->collect = mlx_xpm_file_to_image(vars->mlx, COLLECT,
 			&tile_size, &tile_size);
-	vars->player = mlx_xpm_file_to_image(vars->mlx, PLAYER_IDLE, 
+	vars->player = mlx_xpm_file_to_image(vars->mlx, PLAYER_IDLE,
 			&tile_size, &tile_size);
-	vars->start = mlx_xpm_file_to_image(vars->mlx, START, 
+	vars->start = mlx_xpm_file_to_image(vars->mlx, START,
 			&tile_size, &tile_size);
-	if (!vars->wall || !vars->floor || !vars->exit 
+	if (!vars->wall || !vars->floor || !vars->exit
 		|| !vars->collect || !vars->player || !vars->start)
 	{
 		free_images(vars);

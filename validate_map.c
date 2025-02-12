@@ -34,7 +34,7 @@ void	if_characters_collectibles_player_exit(t_vars *vars)
 			c = vars->map[vars->y][vars->x];
 			if (c != 'C' && c != 'P' && c != 'E' && c != '0' && c != '1')
 				error_handler("There is an unknown character");
-			if (c == 'C') 
+			if (c == 'C')
 				vars->count_collect++;
 			if (c == 'P')
 				vars->count_player++;
@@ -50,7 +50,6 @@ void	if_characters_collectibles_player_exit(t_vars *vars)
 int	if_walls_rectangular(t_vars *vars)
 {
 	int	bottom_max;
-	int	r_max;
 
 	bottom_max = vars->map_height - 1;
 	while (vars->y < vars->map_height - 1)
@@ -61,16 +60,16 @@ int	if_walls_rectangular(t_vars *vars)
 	}
 	while (vars->map[0][vars->x] && vars->map[bottom_max][vars->x])
 	{
-		if (vars->map[0][vars->x] != '1' 
+		if (vars->map[0][vars->x] != '1'
 			|| vars->map[bottom_max][vars->x] != '1')
 			error_handler("Upper or bottom wall has a hole");
 		vars->x++;
 	}
-	r_max = vars->x - 1;
 	vars->y = 0;
 	while (vars->y < vars->map_height)
 	{
-		if (vars->map[vars->y][0] != '1' || vars->map[vars->y][r_max] != '1')
+		if (vars->map[vars->y][0] != '1'
+			|| vars->map[vars->y][vars->x - 1] != '1')
 			error_handler("Right or left wall has a hole");
 		vars->y++;
 	}

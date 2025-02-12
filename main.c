@@ -67,7 +67,7 @@ int	main(int argc, char *argv[])
 
 	if (argc != 2)
 		error_handler("The number of args is invalid");
-	if (ft_strlen(argv[1]) < 4 
+	if (ft_strlen(argv[1]) < 4
 		|| ft_strncmp(argv[1] + ft_strlen(argv[1]) - 4, ".ber", 4) != 0)
 		error_handler("The extension is invalid");
 	initialize_game(&vars);

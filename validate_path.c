@@ -48,27 +48,27 @@ char	**duplicate_map(t_vars *vars)
 	return (copy_map);
 }
 
-void	fill(char **map, t_vars *vars, char target, int row, int col)
+void	fill(t_vars *vars, char target, int row, int col)
 {
 	if (row < 0 || col < 0 || row >= vars->map_height || col >= vars->map_width)
 		return ;
-	if (map[row][col] == 'F' || map[row][col] == '1')
+	if (vars->copy_map[row][col] == 'F' || vars->copy_map[row][col] == '1')
 		return ;
-	if (map[row][col] == 'C')
+	if (vars->copy_map[row][col] == 'C')
 	{
 		vars->reachable_collect++;
-		map[row][col] = '0';
+		vars->copy_map[row][col] = '0';
 	}
-	if (map[row][col] == 'E')
+	if (vars->copy_map[row][col] == 'E')
 	{
 		vars->exit_flag = 1;
-		map[row][col] = '0';
+		vars->copy_map[row][col] = '0';
 	}
-	map[row][col] = 'F';
-	fill(map, vars, target, row - 1, col);
-	fill(map, vars, target, row + 1, col);
-	fill(map, vars, target, row, col - 1);
-	fill(map, vars, target, row, col + 1);
+	vars->copy_map[row][col] = 'F';
+	fill(vars, target, row - 1, col);
+	fill(vars, target, row + 1, col);
+	fill(vars, target, row, col - 1);
+	fill(vars, target, row, col + 1);
 }
 
 void	flood_fill(char **map, t_vars *vars)
@@ -93,7 +93,7 @@ void	flood_fill(char **map, t_vars *vars)
 	vars->init_player_x = j;
 	map[i][j] = '0';
 	target = map[i][j];
-	fill(map, vars, target, i, j);
+	fill(vars, target, i, j);
 	if (vars->reachable_collect != vars->count_collect)
 		error_handler("Collectibles are not reachable");
 	if (!vars->exit_flag)
@@ -102,12 +102,11 @@ void	flood_fill(char **map, t_vars *vars)
 
 void	if_possible_to_win(t_vars *vars)
 {
-	char	**copy_map;
-
-	copy_map = duplicate_map(vars);
-	if (copy_map)
+	vars->copy_map = NULL;
+	vars->copy_map = duplicate_map(vars);
+	if (vars->copy_map)
 	{
-		flood_fill(copy_map, vars);
-		free_map (copy_map, vars->map_height);
+		flood_fill(vars->copy_map, vars);
+		free_map (vars->copy_map, vars->map_height);
 	}
 }
