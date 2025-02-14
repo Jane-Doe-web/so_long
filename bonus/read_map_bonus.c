@@ -61,15 +61,6 @@ char	**read_map(char *map_path, t_vars *vars)
 	char	**map;
 	char	*line;
 
-	/*fd = open_map_file (map_path);
-	line = get_next_line(fd);
-	while (line != NULL)
-	{
-		vars->map_height++;
-		free(line);
-		line = get_next_line(fd);
-	}
-	close(fd);*/
 	line = NULL;
 	count_map_height(map_path, vars);
 	map = malloc(sizeof(char *) * (vars->map_height + 1));

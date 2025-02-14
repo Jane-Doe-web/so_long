@@ -44,6 +44,32 @@ void	initialize_game(t_vars *vars)
 	vars->player_x = 0;
 	vars->init_player_y = 0;
 	vars->init_player_x = 0;
+	vars->count_enem = 0;
+}
+void	initialize_enemies(t_vars *vars)
+{
+	int	i;
+
+	vars->y = 0;
+	vars->x = 0;
+	i = 0;
+	vars->enemies = malloc(sizeof(vars->enemies) * vars->count_enem);
+	if (!vars->enemies)
+		exit(1);
+	while (vars->map[vars->y])
+	{
+		while (vars->map[vars->y][vars->x])
+		{
+			if (vars->map[vars->y][vars->x] == 'X')
+			{
+				vars->enemies[i].en_y = vars->y;
+				vars->enemies[i].en_x = vars->x;
+				i++;
+			}
+			vars->x++;
+		}
+		vars->y++;
+	}
 }
 
 void	start_game_window(t_vars *vars)
@@ -75,10 +101,13 @@ int	main(int argc, char *argv[])
 	if (!vars.map)
 		error_handler("Cannot load the map");
 	validate_map(&vars);
+	if (vars.count_enem > 0)
+		initialize_enemies(&vars);
 	start_game_window(&vars);
 	set_img(&vars);
 	render_map (&vars);
 	mlx_hook(vars.window, 2, 1L << 0, &handle_key, &vars);
 	mlx_hook(vars.window, 17, 0, &handle_exit, &vars);
+	mlx_loop_hook(vars.mlx, &move_enemy, &vars);
 	mlx_loop(vars.mlx);
 }

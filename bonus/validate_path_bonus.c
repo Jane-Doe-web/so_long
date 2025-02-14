@@ -52,19 +52,19 @@ void	fill(t_vars *vars, char target, int row, int col)
 {
 	if (row < 0 || col < 0 || row >= vars->map_height || col >= vars->map_width)
 		return ;
-	if (vars->copy_map[row][col] == 'F' || vars->copy_map[row][col] == '1')
+	if (vars->copy_map[row][col] == 'A' || vars->copy_map[row][col] == '1')
 		return ;
 	if (vars->copy_map[row][col] == 'C')
 	{
 		vars->reachable_collect++;
 		vars->copy_map[row][col] = '0';
 	}
-	if (vars->copy_map[row][col] == 'E')
+	if (vars->copy_map[row][col] == 'E' || vars->copy_map[row][col] == 'X')
 	{
 		vars->exit_flag = 1;
 		vars->copy_map[row][col] = '0';
 	}
-	vars->copy_map[row][col] = 'F';
+	vars->copy_map[row][col] = 'A';
 	fill(vars, target, row - 1, col);
 	fill(vars, target, row + 1, col);
 	fill(vars, target, row, col - 1);

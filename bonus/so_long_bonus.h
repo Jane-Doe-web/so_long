@@ -17,8 +17,15 @@
 # define COLLECT "./textures/collectible.xpm"
 # define EXIT "./textures/exit.xpm"
 # define START "./textures/start.xpm"
+# define ENEMY "./textures/enemy.xpm"
 
 # define TILE_SIZE 64
+
+typedef struct enemy
+{
+	int	en_x;
+	int	en_y;
+}	t_enemy;
 
 typedef struct vars
 {
@@ -30,6 +37,7 @@ typedef struct vars
 	void	*exit;
 	void	*start;
 	void	*collect;
+	void	*foe;
 	void	*img;
 	char	**map;
 	char	**copy_map;
@@ -47,6 +55,9 @@ typedef struct vars
 	int		exit_flag;
 	int		reachable_collect;
 	int		steps;
+	int		count_enem;
+	t_enemy	enemy;
+	t_enemy	*enemies;
 }	t_vars;
 
 void	initialize_game(t_vars *vars);
@@ -76,5 +87,6 @@ int		handle_exit(t_vars *vars);
 int		handle_key(int keysym, t_vars *vars);
 int		if_walls_rectangular(t_vars *vars);
 int		open_map_file(char *map_path);
+void	initialize_enemies(t_vars *vars);
 
 #endif

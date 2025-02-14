@@ -18,7 +18,22 @@ void	you_win(t_vars *vars)
 	ft_putstr_fd("Zurück bleiben, bitte!\n", 1);
 	exit_function(vars);
 }
+void	put_steps_to_the_window(t_vars *vars)
+{
+	char	*str;
+	char	*steps_str;
+	int	x;
+	int	y;
 
+	mlx_set_font(vars->mlx, vars->window, "10x20");
+	steps_str = ft_itoa(vars->steps);
+	str = ft_strjoin("Number of steps: ", steps_str);
+	y = vars->map_height * TILE_SIZE - TILE_SIZE / 2;
+	x = vars->map_width * TILE_SIZE / 4;
+	mlx_string_put(vars->mlx, vars->window, x, y, 0x000000, str);
+	free(str);
+	free(steps_str);
+}
 void	move_player(t_vars *vars, int i, int j)
 {
 	int	upd_y;
@@ -40,8 +55,7 @@ void	move_player(t_vars *vars, int i, int j)
 		vars->map[upd_y][upd_x] = 'P';
 		render_map(vars);
 		vars->steps++;
-		ft_putstr_fd("Number of steps:", 1);
-		ft_printf("%d\n", vars->steps);
+		put_steps_to_the_window(vars);
 	}
 }
 

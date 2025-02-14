@@ -25,6 +25,8 @@ void	free_images(t_vars *vars)
 		mlx_destroy_image(vars->mlx, vars->player);
 	if (vars->start)
 		mlx_destroy_image(vars->mlx, vars->start);
+	if (vars->foe)
+		mlx_destroy_image(vars->mlx, vars->foe);
 }
 
 void	exit_function(t_vars *vars)
@@ -43,6 +45,11 @@ void	exit_function(t_vars *vars)
 	{
 		free_map(vars->map, vars->map_height);
 		vars->map = NULL;
+	}
+	if (vars->enemies)
+	{
+		free(vars->enemies);
+		vars->enemies = NULL;
 	}
 	exit(EXIT_SUCCESS);
 }

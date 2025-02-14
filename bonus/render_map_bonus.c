@@ -28,8 +28,11 @@ void	set_img(t_vars *vars)
 			&tile_size, &tile_size);
 	vars->start = mlx_xpm_file_to_image(vars->mlx, START,
 			&tile_size, &tile_size);
+	vars->foe = mlx_xpm_file_to_image(vars->mlx, ENEMY,
+			&tile_size, &tile_size);
 	if (!vars->wall || !vars->floor || !vars->exit
-		|| !vars->collect || !vars->player || !vars->start)
+		|| !vars->collect || !vars->player 
+		|| !vars->start || !vars->foe)
 	{
 		free_images(vars);
 		error_handler("Failed to load images");
@@ -81,6 +84,8 @@ void	render_the_rest(t_vars *vars)
 				draw_img(vars, vars->exit, j, i);
 			if (vars->map[i][j] == 'P')
 				draw_img(vars, vars->player, j, i);
+			if (vars->map[i][j] == 'X')
+				draw_img(vars, vars->foe, j, i);
 			j++;
 		}
 		i++;
