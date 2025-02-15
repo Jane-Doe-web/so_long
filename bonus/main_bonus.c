@@ -17,61 +17,6 @@ void	error_handler(char *str)
 	ft_putstr_fd(str, 1);
 	exit (1);
 }
-
-void	initialize_game(t_vars *vars)
-{
-	vars->map_height = 0;
-	vars->map_width = 0;
-	vars->x = 0;
-	vars->y = 0;
-	vars->count_collect = 0;
-	vars->count_player = 0;
-	vars->count_exit = 0;
-	vars->exit_flag = 0;
-	vars->reachable_collect = 0;
-	vars->steps = 0;
-	vars->mlx = NULL;
-	vars->window = NULL;
-	vars->wall = NULL;
-	vars->floor = NULL;
-	vars->player = NULL;
-	vars->exit = NULL;
-	vars->start = NULL;
-	vars->collect = NULL;
-	vars->img = NULL;
-	vars->map = NULL;
-	vars->player_y = 0;
-	vars->player_x = 0;
-	vars->init_player_y = 0;
-	vars->init_player_x = 0;
-	vars->count_enem = 0;
-}
-void	initialize_enemies(t_vars *vars)
-{
-	int	i;
-
-	vars->y = 0;
-	vars->x = 0;
-	i = 0;
-	vars->enemies = malloc(sizeof(vars->enemies) * vars->count_enem);
-	if (!vars->enemies)
-		exit(1);
-	while (vars->map[vars->y])
-	{
-		while (vars->map[vars->y][vars->x])
-		{
-			if (vars->map[vars->y][vars->x] == 'X')
-			{
-				vars->enemies[i].en_y = vars->y;
-				vars->enemies[i].en_x = vars->x;
-				i++;
-			}
-			vars->x++;
-		}
-		vars->y++;
-	}
-}
-
 void	start_game_window(t_vars *vars)
 {
 	int	x;
@@ -108,6 +53,6 @@ int	main(int argc, char *argv[])
 	render_map (&vars);
 	mlx_hook(vars.window, 2, 1L << 0, &handle_key, &vars);
 	mlx_hook(vars.window, 17, 0, &handle_exit, &vars);
-	mlx_loop_hook(vars.mlx, &move_enemy, &vars);
+	mlx_loop_hook(vars.mlx, game_loop, &vars);
 	mlx_loop(vars.mlx);
 }

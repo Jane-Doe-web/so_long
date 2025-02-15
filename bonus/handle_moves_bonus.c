@@ -11,12 +11,14 @@
 /* ************************************************************************** */
 #include "so_long_bonus.h"
 
-void	you_win(t_vars *vars)
+int	game_loop(void *param)
 {
-	ft_putstr_fd("You won! 🔥🔥🔥\n", 1);
-	ft_putstr_fd("This is S9 to Berghain!\n", 1);
-	ft_putstr_fd("Zurück bleiben, bitte!\n", 1);
-	exit_function(vars);
+	t_vars	*vars;
+	vars = (t_vars *)param;
+	move_enemy(vars);
+	render_map(vars);
+	put_steps_to_the_window(vars);
+	return(0);
 }
 void	put_steps_to_the_window(t_vars *vars)
 {
@@ -55,7 +57,6 @@ void	move_player(t_vars *vars, int i, int j)
 		vars->map[upd_y][upd_x] = 'P';
 		render_map(vars);
 		vars->steps++;
-		put_steps_to_the_window(vars);
 	}
 }
 

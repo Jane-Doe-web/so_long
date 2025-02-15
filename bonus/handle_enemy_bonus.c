@@ -1,39 +1,89 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   handle_enemy_bonus.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: esteudle <esteudle@student.42berlin.d      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/15 20:19:34 by esteudle          #+#    #+#             */
+/*   Updated: 2025/02/15 20:19:41 by esteudle         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 #include "so_long_bonus.h"
-int	can_walk_horizontally(t_vars *vars, int i)
+
+void	horizontal_walk(t_vars *vars, int i)
 {
-	if (vars->enemies[i].en_x + 1 != '1')
-		return(1);
-	return(0);
+	int	y;
+	int	x;
+
+	y = vars->enemies[i].en_y;
+	x = vars->enemies[i].en_x;
+	if (vars->enemies[i].direction_x == 1)
+	{
+		if (x + 1 < vars->map_width && vars->map[y][x + 1] != '1' 
+			&& vars->map[y][x + 1] != 'C' && vars->map[y][x + 1] != 'E' 
+			&& (y != vars->init_player_y || x + 1!= vars->init_player_x))
+				vars->enemies[i].en_x++;
+		else
+			vars->enemies[i].direction_x = -1;
+	}
+	else
+	{
+		if (vars->map[y][x - 1] != '1' && vars->map[y][x - 1] != 'C'
+			&& vars->map[y][x - 1] != 'E' && (y != vars->init_player_y
+			|| x - 1 != vars->init_player_x))
+				vars->enemies[i].en_x--;
+		else
+			vars->enemies[i].direction_x = 1;
+	}
 }
-int	can_walk_vertically(t_vars *vars, int i)
+void	vertical_walk(t_vars *vars, int i)
 {
-	if (vars->enemies[i].en_y + 1 != '1')
-		return(1);
-	return(0);
+	int	y;
+	int	x;
+
+	y = vars->enemies[i].en_y;
+	x = vars->enemies[i].en_x;
+	if (vars->enemies[i].direction_y == 1)
+	{
+		if (vars->map[y + 1][x] != '1' && vars->map[y + 1][x] != 'C'
+			&& vars->map[y + 1][x] != 'E' && (x != vars->init_player_x
+			&& y + 1 != vars->init_player_y))
+				vars->enemies[i].en_y++;
+		else
+			vars->enemies[i].direction_y = -1;
+	}
+	else
+	{
+		if (vars->map[y - 1][x] != '1' && vars->map[y - 1][x] != 'C'
+			&& vars->map[y - 1][x] != 'E' && (x != vars->init_player_x
+			&& y - 1 != vars->init_player_y))
+				vars->enemies[i].en_y--;
+		else
+			vars->enemies[i].direction_y = 1;
+	}
 }
-void	change_direction(t_vars *vars, int i)
+
+int	move_enemy(t_vars *vars)
 {
-	while (vars->enemies[i].en_x - 1 != '1')
-		vars->enemies[i].en_x--;
-}
-void	move_enemy(t_vars *vars)
-{
+	usleep (50000);
 	static int	frame;
 	int	i;
 
-	frame = 0;
-	if (frame++ > 10)
+	if (frame++ <= 10)
 		return(0);
 	frame = 0;
 	i = 0;
-	while (vars->enemies[i++] && i < vars->count_enem)
+	while (i < vars->count_enem)
 	{
+		vars->map[vars->enemies[i].en_y][vars->enemies[i].en_x] = '0';
 		if (i % 2 == 0)
-		{
-			if (can_walk_horizontally(vars, i))
-				vars->enemies[i].en_x++;
-			else
-				change_direction(vars, i);
-		}
+			horizontal_walk(vars, i);
+		else
+			vertical_walk(vars, i);
+		vars->map[vars->enemies[i].en_y][vars->enemies[i].en_x] = 'X';
+		i++;
 	}
+	return(0);
 }
+
