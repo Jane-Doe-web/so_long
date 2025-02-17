@@ -89,12 +89,13 @@ int		handle_exit(t_vars *vars);
 int		handle_key(int keysym, t_vars *vars);
 int		if_walls_rectangular(t_vars *vars);
 int		open_map_file(char *map_path);
+int		move_enemy(t_vars *vars);
+int		game_loop(void *param);
 void	initialize_enemies(t_vars *vars);
-int	move_enemy(t_vars *vars);
 void	horizontal_walk(t_vars *vars, int i);
 void	vertical_walk(t_vars *vars, int i);
 void	initialize_enemy_direction(t_vars *vars);
 void	put_steps_to_the_window(t_vars *vars);
-int	game_loop(void *param);
+void	you_lose(t_vars *vars);
 
 #endif

@@ -39,6 +39,7 @@ void	initialize_game(t_vars *vars)
 	vars->init_player_x = 0;
 	vars->count_enem = 0;
 }
+
 void	initialize_enemy_direction(t_vars *vars)
 {
 	int	i;
@@ -51,9 +52,11 @@ void	initialize_enemy_direction(t_vars *vars)
 		i++;
 	}
 }
+
 void	initialize_enemies(t_vars *vars)
 {
 	int	i;
+	
 	vars->y = 0;
 	i = 0;
 	vars->enemies = malloc(sizeof(t_enemy) * vars->count_enem);
@@ -74,5 +77,5 @@ void	initialize_enemies(t_vars *vars)
 		}
 		vars->y++;
 	}
-	initialize_enemy_direction(vars); 
+	initialize_enemy_direction(vars);
 }

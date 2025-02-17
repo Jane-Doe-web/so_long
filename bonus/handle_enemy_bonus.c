@@ -15,63 +15,44 @@ void	horizontal_walk(t_vars *vars, int i)
 {
 	int	y;
 	int	x;
+	int	next_x;
 
 	y = vars->enemies[i].en_y;
 	x = vars->enemies[i].en_x;
-	if (vars->enemies[i].direction_x == 1)
-	{
-		if (x + 1 < vars->map_width && vars->map[y][x + 1] != '1' 
-			&& vars->map[y][x + 1] != 'C' && vars->map[y][x + 1] != 'E' 
-			&& (y != vars->init_player_y || x + 1!= vars->init_player_x))
-				vars->enemies[i].en_x++;
-		else
-			vars->enemies[i].direction_x = -1;
-	}
+	next_x = x + vars->enemies[i].direction_x;
+	if (next_x >= 0 && next_x < vars->map_width && vars->map[y][next_x] != '1'
+		&& vars->map[y][next_x] != 'C' && vars->map[y][next_x] != 'E'
+		&& y != vars->init_player_y && x != vars->init_player_x)
+		vars->enemies[i].en_x = next_x;
 	else
-	{
-		if (vars->map[y][x - 1] != '1' && vars->map[y][x - 1] != 'C'
-			&& vars->map[y][x - 1] != 'E' && (y != vars->init_player_y
-			|| x - 1 != vars->init_player_x))
-				vars->enemies[i].en_x--;
-		else
-			vars->enemies[i].direction_x = 1;
-	}
+		vars->enemies[i].direction_x *= -1;
 }
+
 void	vertical_walk(t_vars *vars, int i)
 {
 	int	y;
 	int	x;
+	int	next_y;
 
 	y = vars->enemies[i].en_y;
 	x = vars->enemies[i].en_x;
-	if (vars->enemies[i].direction_y == 1)
-	{
-		if (vars->map[y + 1][x] != '1' && vars->map[y + 1][x] != 'C'
-			&& vars->map[y + 1][x] != 'E' && (x != vars->init_player_x
-			&& y + 1 != vars->init_player_y))
-				vars->enemies[i].en_y++;
-		else
-			vars->enemies[i].direction_y = -1;
-	}
+	next_y = y + vars->enemies[i].direction_y;
+	if (next_y >= 0 && next_y < vars->map_height && vars->map[next_y][x] != '1'
+		&& vars->map[next_y][x] != 'C' && vars->map[next_y][x] != 'E'
+		&& y != vars->init_player_y && x != vars->init_player_x)
+		vars->enemies[i].en_y = next_y;
 	else
-	{
-		if (vars->map[y - 1][x] != '1' && vars->map[y - 1][x] != 'C'
-			&& vars->map[y - 1][x] != 'E' && (x != vars->init_player_x
-			&& y - 1 != vars->init_player_y))
-				vars->enemies[i].en_y--;
-		else
-			vars->enemies[i].direction_y = 1;
-	}
+		vars->enemies[i].direction_y *= -1;
 }
 
 int	move_enemy(t_vars *vars)
 {
-	usleep (50000);
 	static int	frame;
-	int	i;
+	int			i;
 
+	usleep (50000);
 	if (frame++ <= 10)
-		return(0);
+		return (0);
 	frame = 0;
 	i = 0;
 	while (i < vars->count_enem)
@@ -81,9 +62,14 @@ int	move_enemy(t_vars *vars)
 			horizontal_walk(vars, i);
 		else
 			vertical_walk(vars, i);
+		if (vars->enemies[i].en_y == vars->player_y
+			&& vars->enemies[i].en_x == vars->player_x)
+		{
+			you_lose(vars);
+			return (0);
+		}
 		vars->map[vars->enemies[i].en_y][vars->enemies[i].en_x] = 'X';
 		i++;
 	}
-	return(0);
+	return (0);
 }
-

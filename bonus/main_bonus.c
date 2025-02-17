@@ -17,6 +17,7 @@ void	error_handler(char *str)
 	ft_putstr_fd(str, 1);
 	exit (1);
 }
+
 void	start_game_window(t_vars *vars)
 {
 	int	x;

@@ -14,18 +14,20 @@
 int	game_loop(void *param)
 {
 	t_vars	*vars;
+		
 	vars = (t_vars *)param;
 	move_enemy(vars);
 	render_map(vars);
 	put_steps_to_the_window(vars);
-	return(0);
+	return (0);
 }
+
 void	put_steps_to_the_window(t_vars *vars)
 {
 	char	*str;
 	char	*steps_str;
-	int	x;
-	int	y;
+	int		x;
+	int		y;
 
 	mlx_set_font(vars->mlx, vars->window, "10x20");
 	steps_str = ft_itoa(vars->steps);
@@ -36,6 +38,7 @@ void	put_steps_to_the_window(t_vars *vars)
 	free(str);
 	free(steps_str);
 }
+
 void	move_player(t_vars *vars, int i, int j)
 {
 	int	upd_y;
@@ -48,6 +51,8 @@ void	move_player(t_vars *vars, int i, int j)
 	if (vars->map[upd_y][upd_x] == 'E'
 		&& vars->count_collect == 0)
 		you_win(vars);
+	if (vars->map[upd_y][upd_x] == 'X')
+		you_lose(vars);
 	if (vars->map[upd_y][upd_x] != '1'
 		&& vars->map[upd_y][upd_x] != 'E')
 	{

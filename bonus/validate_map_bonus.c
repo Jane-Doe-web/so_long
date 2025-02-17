@@ -32,7 +32,8 @@ void	if_characters_collectibles_player_exit(t_vars *vars)
 		while (vars->map[vars->y][vars->x])
 		{
 			c = vars->map[vars->y][vars->x];
-			if (c != 'C' && c != 'P' && c != 'E' && c != '0' && c != '1' && c != 'X')
+			if (c != 'C' && c != 'P' && c != 'E' && c != '0'
+				&& c != '1' && c != 'X')
 				error_handler("There is an unknown character");
 			if (c == 'C')
 				vars->count_collect++;

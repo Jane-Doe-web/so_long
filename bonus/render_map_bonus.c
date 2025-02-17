@@ -31,7 +31,7 @@ void	set_img(t_vars *vars)
 	vars->foe = mlx_xpm_file_to_image(vars->mlx, ENEMY,
 			&tile_size, &tile_size);
 	if (!vars->wall || !vars->floor || !vars->exit
-		|| !vars->collect || !vars->player 
+		|| !vars->collect || !vars->player
 		|| !vars->start || !vars->foe)
 	{
 		free_images(vars);
