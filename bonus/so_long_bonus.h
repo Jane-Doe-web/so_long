@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   so_long_bonus.h                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: esteudle <esteudle@student.42berlin.d      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/18 14:43:32 by esteudle          #+#    #+#             */
+/*   Updated: 2025/02/18 14:44:06 by esteudle         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 #ifndef SO_LONG_BONUS_H
 # define SO_LONG_BONUS_H
 
@@ -62,10 +73,9 @@ typedef struct vars
 	t_enemy	*enemies;
 }	t_vars;
 
-void	initialize_game(t_vars *vars);
 void	process_count_cpe(t_vars *vars);
 void	if_characters_collectibles_player_exit(t_vars *vars);
-void	error_handler(char *str);
+void	error_handler(char *str, t_vars *vars);
 void	count_map_height(char *map_path, t_vars *vars);
 void	validate_map(t_vars *vars);
 void	if_possible_to_win(t_vars *vars);
@@ -88,7 +98,7 @@ char	**read_map(char *map_path, t_vars *vars);
 int		handle_exit(t_vars *vars);
 int		handle_key(int keysym, t_vars *vars);
 int		if_walls_rectangular(t_vars *vars);
-int		open_map_file(char *map_path);
+int		open_map_file(char *map_path, t_vars *vars);
 int		move_enemy(t_vars *vars);
 int		game_loop(void *param);
 void	initialize_enemies(t_vars *vars);
@@ -97,5 +107,6 @@ void	vertical_walk(t_vars *vars, int i);
 void	initialize_enemy_direction(t_vars *vars);
 void	put_steps_to_the_window(t_vars *vars);
 void	you_lose(t_vars *vars);
+void	check_extention(char *s);
 
 #endif

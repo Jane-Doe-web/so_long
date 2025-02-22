@@ -11,18 +11,18 @@
 /* ************************************************************************** */
 #include "so_long_bonus.h"
 
-int	open_map_file(char *map_path)
+int	open_map_file(char *map_path, t_vars *vars)
 {
 	int		fd;
 	char	buffer[1];
 
 	fd = open(map_path, O_RDONLY);
 	if (fd < 0)
-		error_handler("Failed to open map file");
+		error_handler("Failed to open map file", vars);
 	if (read(fd, buffer, 1) == 0)
 	{
 		close(fd);
-		error_handler("Map file is empty");
+		error_handler("Map file is empty", vars);
 	}
 	close(fd);
 	return (open(map_path, O_RDONLY));
@@ -34,7 +34,7 @@ void	count_map_height(char *map_path, t_vars *vars)
 	char	*line;
 
 	line = NULL;
-	fd = open_map_file (map_path);
+	fd = open_map_file (map_path, vars);
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
@@ -66,7 +66,7 @@ char	**read_map(char *map_path, t_vars *vars)
 	map = malloc(sizeof(char *) * (vars->map_height + 1));
 	if (!map)
 		return (NULL);
-	fd = open_map_file (map_path);
+	fd = open_map_file (map_path, vars);
 	vars->map_height = 0;
 	line = get_next_line(fd);
 	while (line != NULL)

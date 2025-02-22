@@ -21,7 +21,7 @@ void	you_win(t_vars *vars)
 
 void	you_lose(t_vars *vars)
 {
-	ft_putstr_fd("Tut mir leid!!!\n", 1);
+	ft_putstr_fd("Tut mir leid!!!💩💩💩\n", 1);
 	ft_putstr_fd("You stepped into the poop!\n", 1);
 	ft_putstr_fd("No Berghain today! Go home and wash your shoes!\n", 1);
 	exit_function(vars);

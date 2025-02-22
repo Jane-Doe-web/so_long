@@ -6,39 +6,10 @@
 /*   By: esteudle <esteudle@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 20:18:44 by esteudle          #+#    #+#             */
-/*   Updated: 2025/02/15 20:18:57 by esteudle         ###   ########.fr       */
+/*   Updated: 2025/02/18 14:42:45 by esteudle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "so_long_bonus.h"
-
-void	initialize_game(t_vars *vars)
-{
-	vars->map_height = 0;
-	vars->map_width = 0;
-	vars->x = 0;
-	vars->y = 0;
-	vars->count_collect = 0;
-	vars->count_player = 0;
-	vars->count_exit = 0;
-	vars->exit_flag = 0;
-	vars->reachable_collect = 0;
-	vars->steps = 0;
-	vars->mlx = NULL;
-	vars->window = NULL;
-	vars->wall = NULL;
-	vars->floor = NULL;
-	vars->player = NULL;
-	vars->exit = NULL;
-	vars->start = NULL;
-	vars->collect = NULL;
-	vars->img = NULL;
-	vars->map = NULL;
-	vars->player_y = 0;
-	vars->player_x = 0;
-	vars->init_player_y = 0;
-	vars->init_player_x = 0;
-	vars->count_enem = 0;
-}
 
 void	initialize_enemy_direction(t_vars *vars)
 {
@@ -56,7 +27,7 @@ void	initialize_enemy_direction(t_vars *vars)
 void	initialize_enemies(t_vars *vars)
 {
 	int	i;
-	
+
 	vars->y = 0;
 	i = 0;
 	vars->enemies = malloc(sizeof(t_enemy) * vars->count_enem);

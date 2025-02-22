@@ -35,7 +35,7 @@ void	set_img(t_vars *vars)
 		|| !vars->start || !vars->foe)
 	{
 		free_images(vars);
-		error_handler("Failed to load images");
+		error_handler("Failed to load images", vars);
 	}
 }
 

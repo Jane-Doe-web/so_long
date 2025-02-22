@@ -15,6 +15,8 @@ void	free_map(char **map, int height)
 {
 	int	i;
 
+	if (!map)
+		return ;
 	i = 0;
 	while (i < height)
 	{
@@ -22,6 +24,7 @@ void	free_map(char **map, int height)
 		i++;
 	}
 	free(map);
+	map = NULL;
 }
 
 char	**duplicate_map(t_vars *vars)
@@ -95,9 +98,9 @@ void	flood_fill(char **map, t_vars *vars)
 	target = map[i][j];
 	fill(vars, target, i, j);
 	if (vars->reachable_collect != vars->count_collect)
-		error_handler("Collectibles are not reachable");
+		error_handler("Collectibles are not reachable", vars);
 	if (!vars->exit_flag)
-		error_handler("Exit is not reachable");
+		error_handler("Exit is not reachable", vars);
 }
 
 void	if_possible_to_win(t_vars *vars)

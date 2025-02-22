@@ -14,11 +14,11 @@
 void	process_count_cpe(t_vars *vars)
 {
 	if (vars->count_collect < 1)
-		error_handler("Nothing to collect");
+		error_handler("Nothing to collect", vars);
 	if (vars->count_player != 1)
-		error_handler("No player or more than 1 player");
+		error_handler("No player or more than 1 player", vars);
 	if (vars->count_exit != 1)
-		error_handler("No exit or more than 1 exit");
+		error_handler("No exit or more than 1 exit", vars);
 }
 
 void	if_characters_collectibles_player_exit(t_vars *vars)
@@ -33,7 +33,7 @@ void	if_characters_collectibles_player_exit(t_vars *vars)
 		{
 			c = vars->map[vars->y][vars->x];
 			if (c != 'C' && c != 'P' && c != 'E' && c != '0' && c != '1')
-				error_handler("There is an unknown character");
+				error_handler("There is an unknown character", vars);
 			if (c == 'C')
 				vars->count_collect++;
 			if (c == 'P')
@@ -55,14 +55,14 @@ int	if_walls_rectangular(t_vars *vars)
 	while (vars->y < vars->map_height - 1)
 	{
 		if (ft_strlen(vars->map[vars->y]) != ft_strlen(vars->map[vars->y + 1]))
-			error_handler("Not rectangular");
+			error_handler("Not rectangular", vars);
 		vars->y++;
 	}
 	while (vars->map[0][vars->x] && vars->map[bottom_max][vars->x])
 	{
 		if (vars->map[0][vars->x] != '1'
 			|| vars->map[bottom_max][vars->x] != '1')
-			error_handler("Upper or bottom wall has a hole");
+			error_handler("Upper or bottom wall has a hole", vars);
 		vars->x++;
 	}
 	vars->y = 0;
@@ -70,7 +70,7 @@ int	if_walls_rectangular(t_vars *vars)
 	{
 		if (vars->map[vars->y][0] != '1'
 			|| vars->map[vars->y][vars->x - 1] != '1')
-			error_handler("Right or left wall has a hole");
+			error_handler("Right or left wall has a hole", vars);
 		vars->y++;
 	}
 	return (vars->x);

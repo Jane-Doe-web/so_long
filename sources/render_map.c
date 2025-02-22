@@ -32,7 +32,7 @@ void	set_img(t_vars *vars)
 		|| !vars->collect || !vars->player || !vars->start)
 	{
 		free_images(vars);
-		error_handler("Failed to load images");
+		error_handler("Failed to load images", vars);
 	}
 }
 

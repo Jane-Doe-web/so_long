@@ -6,7 +6,7 @@
 /*   By: esteudle <esteudle@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 18:28:17 by esteudle          #+#    #+#             */
-/*   Updated: 2024/11/08 19:37:04 by esteudle         ###   ########.fr       */
+/*   Updated: 2025/02/18 14:44:49 by esteudle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
@@ -22,4 +22,3 @@ int	main()
 	ft_bzero(s, 3);
 	fwrite(s, sizeof(char), sizeof(s), stdout);
 }*/
-

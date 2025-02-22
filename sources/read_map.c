@@ -6,23 +6,23 @@
 /*   By: esteudle <esteudle@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 15:30:35 by esteudle          #+#    #+#             */
-/*   Updated: 2025/02/11 18:45:46 by esteudle         ###   ########.fr       */
+/*   Updated: 2025/02/18 14:47:32 by esteudle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "so_long.h"
 
-int	open_map_file(char *map_path)
+int	open_map_file(char *map_path, t_vars *vars)
 {
 	int		fd;
 	char	buffer[1];
 
 	fd = open(map_path, O_RDONLY);
 	if (fd < 0)
-		error_handler("Failed to open map file");
+		error_handler("Failed to open map file", vars);
 	if (read(fd, buffer, 1) == 0)
 	{
 		close(fd);
-		error_handler("Map file is empty");
+		error_handler("Map file is empty", vars);
 	}
 	close(fd);
 	return (open(map_path, O_RDONLY));
@@ -34,7 +34,7 @@ void	count_map_height(char *map_path, t_vars *vars)
 	char	*line;
 
 	line = NULL;
-	fd = open_map_file (map_path);
+	fd = open_map_file (map_path, vars);
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
@@ -61,21 +61,12 @@ char	**read_map(char *map_path, t_vars *vars)
 	char	**map;
 	char	*line;
 
-	/*fd = open_map_file (map_path);
-	line = get_next_line(fd);
-	while (line != NULL)
-	{
-		vars->map_height++;
-		free(line);
-		line = get_next_line(fd);
-	}
-	close(fd);*/
 	line = NULL;
 	count_map_height(map_path, vars);
 	map = malloc(sizeof(char *) * (vars->map_height + 1));
 	if (!map)
 		return (NULL);
-	fd = open_map_file (map_path);
+	fd = open_map_file (map_path, vars);
 	vars->map_height = 0;
 	line = get_next_line(fd);
 	while (line != NULL)

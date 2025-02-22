@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_moves.c                                     :+:      :+:    :+:   */
+/*   handle_moves_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: esteudle <esteudle@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 15:29:32 by esteudle          #+#    #+#             */
-/*   Updated: 2025/02/11 18:34:10 by esteudle         ###   ########.fr       */
+/*   Updated: 2025/02/18 14:42:10 by esteudle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "so_long_bonus.h"
@@ -14,7 +14,7 @@
 int	game_loop(void *param)
 {
 	t_vars	*vars;
-		
+
 	vars = (t_vars *)param;
 	move_enemy(vars);
 	render_map(vars);

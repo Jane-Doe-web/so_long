@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   so_long.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: esteudle <esteudle@student.42berlin.d      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/18 14:47:56 by esteudle          #+#    #+#             */
+/*   Updated: 2025/02/18 14:48:02 by esteudle         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
@@ -49,10 +60,9 @@ typedef struct vars
 	int		steps;
 }	t_vars;
 
-void	initialize_game(t_vars *vars);
 void	process_count_cpe(t_vars *vars);
 void	if_characters_collectibles_player_exit(t_vars *vars);
-void	error_handler(char *str);
+void	error_handler(char *str, t_vars *vars);
 void	count_map_height(char *map_path, t_vars *vars);
 void	validate_map(t_vars *vars);
 void	if_possible_to_win(t_vars *vars);
@@ -75,6 +85,6 @@ char	**read_map(char *map_path, t_vars *vars);
 int		handle_exit(t_vars *vars);
 int		handle_key(int keysym, t_vars *vars);
 int		if_walls_rectangular(t_vars *vars);
-int		open_map_file(char *map_path);
+int		open_map_file(char *map_path, t_vars *vars);
 
 #endif
