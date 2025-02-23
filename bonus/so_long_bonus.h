@@ -108,5 +108,6 @@ void	initialize_enemy_direction(t_vars *vars);
 void	put_steps_to_the_window(t_vars *vars);
 void	you_lose(t_vars *vars);
 void	check_extention(char *s);
+void	walking(t_vars *vars, int i);
 
 #endif
