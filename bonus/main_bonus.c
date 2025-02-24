@@ -52,8 +52,8 @@ void	start_game_window(t_vars *vars)
 	y = vars->map_height * TILE_SIZE;
 	if (x > screen_width || y > screen_height)
 	{
-		exit_function(vars);
 		ft_printf("Map is too big for this screen", vars);
+		exit_function(vars);
 	}
 	vars->window = mlx_new_window(vars->mlx, x, y, "Berlin");
 	if (!vars->window)
