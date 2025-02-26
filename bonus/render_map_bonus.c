@@ -82,7 +82,9 @@ void	render_the_rest(t_vars *vars)
 				draw_img(vars, vars->collect, j, i);
 			if (vars->map[i][j] == 'E')
 				draw_img(vars, vars->exit, j, i);
-			if (vars->map[i][j] == 'P')
+			if (vars->map[i][j] == 'P'
+				|| (i == vars->exit_y && j == vars->exit_x
+				&& vars->player_y == i && vars->player_x == j))
 				draw_img(vars, vars->player, j, i);
 			if (vars->map[i][j] == 'X')
 				draw_img(vars, vars->foe, j, i);

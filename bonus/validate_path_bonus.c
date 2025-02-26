@@ -62,9 +62,11 @@ void	fill(t_vars *vars, char target, int row, int col)
 		vars->reachable_collect++;
 		vars->copy_map[row][col] = '0';
 	}
-	if (vars->copy_map[row][col] == 'E' || vars->copy_map[row][col] == 'X')
+	if (vars->copy_map[row][col] == 'E')
 	{
 		vars->exit_flag = 1;
+		vars->exit_y = row;
+		vars->exit_x = col;
 		vars->copy_map[row][col] = '0';
 	}
 	vars->copy_map[row][col] = 'A';

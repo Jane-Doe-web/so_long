@@ -58,6 +58,8 @@ typedef struct vars
 	int		exit_flag;
 	int		reachable_collect;
 	int		steps;
+	int		exit_y;
+	int		exit_x;
 }	t_vars;
 
 void	process_count_cpe(t_vars *vars);

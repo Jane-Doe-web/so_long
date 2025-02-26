@@ -66,6 +66,8 @@ typedef struct vars
 	int		init_player_y;
 	int		init_player_x;
 	int		exit_flag;
+	int		exit_y;
+	int		exit_x;
 	int		reachable_collect;
 	int		steps;
 	int		count_enem;

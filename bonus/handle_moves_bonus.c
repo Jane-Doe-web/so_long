@@ -53,10 +53,12 @@ void	move_player(t_vars *vars, int i, int j)
 		you_win(vars);
 	if (vars->map[upd_y][upd_x] == 'X')
 		you_lose(vars);
-	if (vars->map[upd_y][upd_x] != '1'
-		&& vars->map[upd_y][upd_x] != 'E')
+	if (vars->map[upd_y][upd_x] != '1')
 	{
-		vars->map[vars->player_y][vars->player_x] = '0';
+		if (vars->player_y == vars->exit_y && vars->player_x == vars->exit_x)
+			vars->map[vars->player_y][vars->player_x] = 'E';
+		else
+			vars->map[vars->player_y][vars->player_x] = '0';		
 		vars->player_y = upd_y;
 		vars->player_x = upd_x;
 		vars->map[upd_y][upd_x] = 'P';
