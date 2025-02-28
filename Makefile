@@ -1,6 +1,6 @@
 NAME = so_long
 NAME_BONUS = so_long_bonus
-CC = gcc
+CC = cc
 CFLAGS = -Wall -Wextra -Werror -I. -I$(SOURCES_DIR) -I$(BONUS_DIR) -I$(GET_NEXT_LINE_DIR) -I$(LIBFT_DIR) -I$(MLX_DIR)
 LIBFT_DIR = libft
 GET_NEXT_LINE_DIR = get_next_line

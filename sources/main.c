@@ -57,13 +57,13 @@ int	main(int argc, char *argv[])
 
 	if (argc != 2)
 	{
-		printf("Error\nThe number of args is invalid");
+		ft_printf("Error\nThe number of args is invalid");
 		exit (1);
 	}
 	if (ft_strlen(argv[1]) < 4
 		|| ft_strncmp(argv[1] + ft_strlen(argv[1]) - 4, ".ber", 4) != 0)
 	{
-		printf("Error\nThe extension is invalid");
+		ft_printf("Error\nThe extension is invalid");
 		exit (1);
 	}
 	ft_memset(&vars, 0, sizeof(t_vars));

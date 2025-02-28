@@ -15,7 +15,7 @@ void	check_extention(char *s)
 {
 	if (ft_strlen(s) < 4 || ft_strncmp(s + ft_strlen(s) - 4, ".ber", 4) != 0)
 	{
-		printf("Error\nThe extension is invalid");
+		ft_printf("Error\nThe extension is invalid");
 		exit (1);
 	}
 }
@@ -66,7 +66,7 @@ int	main(int argc, char *argv[])
 
 	if (argc != 2)
 	{
-		printf("Error\nThe number of args is invalid");
+		ft_printf("Error\nThe number of args is invalid");
 		exit (1);
 	}
 	check_extention(argv[1]);

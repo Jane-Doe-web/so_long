@@ -19,6 +19,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <X11/keysym.h>
+# include <mlx.h>
 
 # define WALL  "./textures/wall.xpm"
 # define FLOOR "./textures/floor.xpm"
